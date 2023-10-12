@@ -1,0 +1,135 @@
+[gd_scene load_steps=10 format=3 uid="uid://cxbamxr0yxw4"]
+
+[ext_resource type="Script" path="res://actors/Enemy.gd" id="1_amren"]
+[ext_resource type="Texture2D" uid="uid://cqa0snc0dxnly" path="res://assets/bk_officer/officer_shoot_strip.png" id="2_t4i4x"]
+[ext_resource type="Texture2D" uid="uid://d185ab3ltcyiw" path="res://assets/Fire Effect and Bullet 16x16.png" id="3_f0dk5"]
+[ext_resource type="PackedScene" uid="uid://c6kagdq7hpwob" path="res://actors/Health.tscn" id="4_a0dwk"]
+[ext_resource type="Texture2D" uid="uid://v6wy7vombo5c" path="res://assets/bk_officer/officer_die_strip.png" id="5_dcktx"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l2118"]
+radius = 14.0
+
+[sub_resource type="Animation" id="Animation_65lgd"]
+resource_name = "enemy_death"
+length = 0.5
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Death:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Death:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_g6ay2"]
+resource_name = "muzzle_flash"
+length = 0.05
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon/MuzzleFlash:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 7.46425),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon/MuzzleFlash:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.8, 0.8), Vector2(0.5, 0.9)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_18ngd"]
+_data = {
+"enemy_death": SubResource("Animation_65lgd"),
+"muzzle_flash": SubResource("Animation_g6ay2")
+}
+
+[node name="Enemy" type="CharacterBody2D"]
+position = Vector2(112, 40)
+rotation = -1.5708
+script = ExtResource("1_amren")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, -1.52588e-05)
+shape = SubResource("CircleShape2D_l2118")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+scale = Vector2(1.03937, 1.13326)
+texture = ExtResource("2_t4i4x")
+region_enabled = true
+region_rect = Rect2(6, 10, 32, 26)
+
+[node name="Death" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-11, -3.8147e-05)
+texture = ExtResource("5_dcktx")
+hframes = 4
+frame = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_18ngd")
+}
+
+[node name="Health" parent="." instance=ExtResource("4_a0dwk")]
+
+[node name="Weapon" type="Node2D" parent="."]
+
+[node name="EndOfGun" type="Marker2D" parent="Weapon"]
+position = Vector2(19, 1.00007)
+
+[node name="AttackCooldown" type="Timer" parent="Weapon"]
+wait_time = 0.3
+one_shot = true
+
+[node name="MuzzleFlash" type="Sprite2D" parent="Weapon"]
+visible = false
+position = Vector2(29.4, 1.09888)
+rotation = 1.5708
+scale = Vector2(0.5, 0.9)
+texture = ExtResource("3_f0dk5")
+region_enabled = true
+region_rect = Rect2(417, 178, 13, 30)
+
+[node name="AI" type="Node2D" parent="."]

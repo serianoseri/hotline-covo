@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://bv1f5kfw267tv"]
+
+[ext_resource type="Script" path="res://actors/Player.gd" id="1_6cwei"]
+[ext_resource type="Texture2D" uid="uid://6bsacc0cifwu" path="res://assets/Top_Down_Survivor/rifle/shoot/survivor-shoot_rifle_0.png" id="2_gcqry"]
+[ext_resource type="PackedScene" uid="uid://rosy7qj5hyfa" path="res://weapons/Weapon.tscn" id="4_dw3vh"]
+[ext_resource type="PackedScene" uid="uid://c6kagdq7hpwob" path="res://actors/Health.tscn" id="5_xnxbt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l2118"]
+radius = 16.0
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(40, 32)
+rotation = -1.5708
+script = ExtResource("1_6cwei")
+speed = 300
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4, 0.999985)
+shape = SubResource("CircleShape2D_l2118")
+
+[node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(-0.999985, -1)
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_gcqry")
+
+[node name="Health" parent="." instance=ExtResource("5_xnxbt")]
+
+[node name="Weapon" parent="." instance=ExtResource("4_dw3vh")]
+position = Vector2(-1.00003, 7)
+rotation = -0.0159204
