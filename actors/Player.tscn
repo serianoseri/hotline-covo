@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bv1f5kfw267tv"]
 
-[ext_resource type="Script" uid="uid://dewjpmrxtq4w0" path="res://actors/Player.gd" id="1_6cwei"]
+[ext_resource type="Script" uid="uid://b4iy2h5g3yvnt" path="res://actors/Player.gd" id="1_6cwei"]
 [ext_resource type="Texture2D" uid="uid://6bsacc0cifwu" path="res://assets/Top_Down_Survivor/rifle/shoot/survivor-shoot_rifle_0.png" id="2_gcqry"]
 [ext_resource type="PackedScene" uid="uid://rosy7qj5hyfa" path="res://weapons/Weapon.tscn" id="4_dw3vh"]
 [ext_resource type="PackedScene" uid="uid://c6kagdq7hpwob" path="res://actors/Health.tscn" id="5_xnxbt"]

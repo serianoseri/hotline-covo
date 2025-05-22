@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://j8cuis8u3c70"]
+[gd_scene load_steps=7 format=3 uid="uid://j8cuis8u3c70"]
 
-[ext_resource type="Script" uid="uid://g0i063pnjx7v" path="res://Main.gd" id="1_b81un"]
+[ext_resource type="Script" uid="uid://uvro2hx53tjd" path="res://Main.gd" id="1_b81un"]
 [ext_resource type="PackedScene" uid="uid://bv1f5kfw267tv" path="res://actors/Player.tscn" id="1_xel8l"]
 [ext_resource type="PackedScene" uid="uid://cxbamxr0yxw4" path="res://actors/Enemy.tscn" id="3_hsaih"]
-[ext_resource type="Script" uid="uid://c13ar4224x1cw" path="res://BulletManager.gd" id="3_pqfdi"]
+[ext_resource type="Script" uid="uid://b8sooo343sj3b" path="res://BulletManager.gd" id="3_pqfdi"]
+[ext_resource type="PackedScene" uid="uid://cyggdjisjj6lj" path="res://HUD/HUD.tscn" id="5_fos0i"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cm0pq"]
 
@@ -45,3 +46,5 @@ max_health = 21
 [node name="Player" parent="." instance=ExtResource("1_xel8l")]
 position = Vector2(87, 137)
 scale = Vector2(2, 2)
+
+[node name="Hud" parent="." instance=ExtResource("5_fos0i")]

@@ -20,6 +20,7 @@ func decrease_health(new_health: int):
 func update_progress(decrease_health:int):
 	progress_bar.value = decrease_health
 	progress_text.text = str(decrease_health)
+		
 
 func is_dead():
 	if health > 0:

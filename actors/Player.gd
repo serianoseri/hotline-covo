@@ -9,6 +9,7 @@ signal player_fired_bullet(bullet, transform)
 
 func _ready():
 	weapon.connect("weapon_fired", self.shoot)
+	emit_signal("update_ammo", weapon.mag_size)
 
 func _physics_process(_delta):
 	look_at(get_global_mouse_position())
@@ -26,6 +27,7 @@ func _physics_process(_delta):
 
 func shoot(bullet_instance, _transform):
 	emit_signal("player_fired_bullet", bullet_instance, _transform)
+	emit_signal("update_ammo", weapon.bullet_count)
 
 func handle_hit():
 	health_stat.health -= 20

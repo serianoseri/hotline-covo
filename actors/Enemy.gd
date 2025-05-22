@@ -8,12 +8,10 @@ class_name Enemy
 @onready var collision_shape = $CollisionShape2D
 
 func _ready() -> void:
-	print(max_health)
 	health_stat.initialize(max_health)
 
-func handle_hit():
-	health_stat.decrease_health(20)
-	
+func handle_hit(damage:int):
+	health_stat.decrease_health(damage)
 	if health_stat.is_dead():
 		anim_player.play("enemy_death")
 
