@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxbamxr0yxw4"]
+[gd_scene load_steps=11 format=3 uid="uid://cxbamxr0yxw4"]
 
-[ext_resource type="Script" path="res://actors/Enemy.gd" id="1_amren"]
+[ext_resource type="Script" uid="uid://5c8i2u6nnd5g" path="res://actors/Enemy.gd" id="1_amren"]
 [ext_resource type="Texture2D" uid="uid://cqa0snc0dxnly" path="res://assets/bk_officer/officer_shoot_strip.png" id="2_t4i4x"]
 [ext_resource type="Texture2D" uid="uid://d185ab3ltcyiw" path="res://assets/Fire Effect and Bullet 16x16.png" id="3_f0dk5"]
 [ext_resource type="PackedScene" uid="uid://c6kagdq7hpwob" path="res://actors/Health.tscn" id="4_a0dwk"]
@@ -49,6 +49,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [0, 1, 2, 3]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0001, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
 
 [sub_resource type="Animation" id="Animation_g6ay2"]
 resource_name = "muzzle_flash"
@@ -79,22 +91,38 @@ tracks/1/keys = {
 "values": [Vector2(0.8, 0.8), Vector2(0.5, 0.9)]
 }
 
+[sub_resource type="Animation" id="Animation_33mp4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_18ngd"]
 _data = {
-"enemy_death": SubResource("Animation_65lgd"),
-"muzzle_flash": SubResource("Animation_g6ay2")
+&"RESET": SubResource("Animation_33mp4"),
+&"enemy_death": SubResource("Animation_65lgd"),
+&"muzzle_flash": SubResource("Animation_g6ay2")
 }
 
 [node name="Enemy" type="CharacterBody2D"]
-position = Vector2(112, 40)
 rotation = -1.5708
 script = ExtResource("1_amren")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-4, -1.52588e-05)
+position = Vector2(-4.62997, -1.26758)
 shape = SubResource("CircleShape2D_l2118")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
+position = Vector2(-0.629968, -1.26756)
 scale = Vector2(1.03937, 1.13326)
 texture = ExtResource("2_t4i4x")
 region_enabled = true
@@ -109,12 +137,16 @@ frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_18ngd")
+&"": SubResource("AnimationLibrary_18ngd")
 }
 
 [node name="Health" parent="." instance=ExtResource("4_a0dwk")]
+position = Vector2(-24, -8.68798e-05)
+rotation = 1.57079
+scale = Vector2(0.232016, 0.232016)
 
 [node name="Weapon" type="Node2D" parent="."]
+position = Vector2(-0.629968, -1.26756)
 
 [node name="EndOfGun" type="Marker2D" parent="Weapon"]
 position = Vector2(19, 1.00007)
@@ -127,7 +159,7 @@ one_shot = true
 visible = false
 position = Vector2(29.4, 1.09888)
 rotation = 1.5708
-scale = Vector2(0.5, 0.9)
+scale = Vector2(0.8, 0.8)
 texture = ExtResource("3_f0dk5")
 region_enabled = true
 region_rect = Rect2(417, 178, 13, 30)

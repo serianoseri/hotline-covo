@@ -1,18 +1,47 @@
-[gd_scene load_steps=5 format=3 uid="uid://j8cuis8u3c70"]
+[gd_scene load_steps=6 format=3 uid="uid://j8cuis8u3c70"]
 
-[ext_resource type="Script" path="res://Main.gd" id="1_b81un"]
+[ext_resource type="Script" uid="uid://g0i063pnjx7v" path="res://Main.gd" id="1_b81un"]
 [ext_resource type="PackedScene" uid="uid://bv1f5kfw267tv" path="res://actors/Player.tscn" id="1_xel8l"]
 [ext_resource type="PackedScene" uid="uid://cxbamxr0yxw4" path="res://actors/Enemy.tscn" id="3_hsaih"]
-[ext_resource type="Script" path="res://BulletManager.gd" id="3_pqfdi"]
+[ext_resource type="Script" uid="uid://c13ar4224x1cw" path="res://BulletManager.gd" id="3_pqfdi"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_cm0pq"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_b81un")
 
-[node name="Player" parent="." instance=ExtResource("1_xel8l")]
-
-[node name="Enemy" parent="." instance=ExtResource("3_hsaih")]
-
 [node name="BulletManager" type="Node2D" parent="."]
 script = ExtResource("3_pqfdi")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(101, -1)
+rotation = -3.14159
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_cm0pq")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(7.62939e-06, 83)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+shape = SubResource("WorldBoundaryShape2D_cm0pq")
+
+[node name="Enemy" parent="." instance=ExtResource("3_hsaih")]
+position = Vector2(693, 398)
+scale = Vector2(2, 2)
+max_health = 8000
+
+[node name="Enemy2" parent="." instance=ExtResource("3_hsaih")]
+position = Vector2(923, 450)
+scale = Vector2(2, 2)
+max_health = 150
+
+[node name="Enemy3" parent="." instance=ExtResource("3_hsaih")]
+position = Vector2(880, 226)
+scale = Vector2(2, 2)
+max_health = 21
+
+[node name="Player" parent="." instance=ExtResource("1_xel8l")]
+position = Vector2(87, 137)
+scale = Vector2(2, 2)

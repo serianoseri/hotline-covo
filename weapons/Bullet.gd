@@ -1,7 +1,8 @@
 extends Area2D
 class_name Bullet
 
-@export var speed = 400
+@export var speed = 700
+var direction = Vector2.DOWN
 
 func _physics_process(delta):
 	position += transform.x * speed * delta
