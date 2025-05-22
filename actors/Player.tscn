@@ -13,6 +13,10 @@ rotation = -1.5708
 script = ExtResource("1_6cwei")
 speed = 300
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 2.5
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-9.40002, -5.55004)
 shape = SubResource("CircleShape2D_l2118")
@@ -28,4 +32,3 @@ visible = false
 [node name="Weapon" parent="." instance=ExtResource("4_dw3vh")]
 position = Vector2(-0.400047, 0.450001)
 rotation = -0.0159204
-wait_time = 0.1
